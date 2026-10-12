@@ -2,7 +2,7 @@
     "name": "tizen-exfil",
     "version": "1.0.0",
     "packageType": "mods",
-    "main": "service.js",
+    "main": "exfil-service.js",
     "appName": "TV Exfil",
     "description": "System data collection"
 }

